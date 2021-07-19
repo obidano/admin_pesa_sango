@@ -4,15 +4,14 @@ import './App.css';
 import {TestFn} from "./fn/test-fn";
 
 function App() {
-    console.log(TestFn.calculate());
 
     return (
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <p>
+                <button onClick={TestFn.recupererList}>
                     Welcome to Pesa Sango
-                </p>
+                </button>
             </header>
         </div>
     );
