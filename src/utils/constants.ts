@@ -1,5 +1,5 @@
 const DEV_CONSTS = {
-    baseUrl: 'http://127.0.0.1:80/',
+    baseUrl: 'http://magic-tech.net:4500/',
 }
 
 const PROD_CONSTS = {

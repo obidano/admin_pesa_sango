@@ -65,13 +65,13 @@ export class Abonne {
 	
 	//Activer ou desactiver un utilisateur	
 	static async ActiveAbonne($abonne:any, etat:any, $action:any) {
-		if(etat === 1)
+		if(etat === true)
 		{
-			$action = 'desactive'
+			$action = false
 		}
 		else
 		{
-			$action = 'active'
+			$action = true
 		}
         const ndata_to_send = {abonne: $abonne, action: $action}
         const res = await apiPOST("sango/index.php", "", ndata_to_send);

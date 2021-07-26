@@ -1,4 +1,4 @@
-//import axios from "axios";
+import axios from "axios";
 import CONSTS from "./constants";
 
 export function randomUrlParams() {
@@ -12,15 +12,15 @@ export function getHeader(token: any) {
     }
 }
 
-/*
-export async function apiGET($token: any, $url: string) {
+
+export async function apiGET2($token: any, $url: string) {
     let rep;
     const url = CONSTS.baseUrl + `${$url}&rand=` + randomUrlParams()
     console.log('GET URL', url)
     try {
         const res = await axios.get(url, {headers: getHeader($token)}
         );
-        rep = res.data.msg;
+        rep = res.data;
         console.log('GET API result', res.data);
 
     } catch (e) {
@@ -31,10 +31,11 @@ export async function apiGET($token: any, $url: string) {
 }
  
 
-export async function apiPOST($url: string, $token: string, $form: any, $action = 'new') {
+export async function apiPOST2($url: string, $token: string, $form: any, $action = 'new') {
     let st;
+    let data;
     const url = CONSTS.baseUrl + $url;
-    console.log('GET URL', url)
+    console.log('GET URL ot', url)
 
     try {
         const res = await axios({
@@ -44,12 +45,13 @@ export async function apiPOST($url: string, $token: string, $form: any, $action 
         })
         console.log('POST/PUT API result', res.data);
         st = true;
+        data = res.data;
     } catch (e) {
         console.error("React Error", e.response);
     }
-    return {st}
+    return {st, data}
 }
-*/
+
 
 export async function apiGET($token: any, $url: string) {
     let rep;
@@ -87,7 +89,10 @@ export async function apiPOST($url: string, $token: string, $form: any, $action 
     try {
         fetch(url, {
 			method: 'POST',
-			body: JSON.stringify({$form})
+			body: $form,
+            headers: new Headers({
+                'Authorization':"JWT "+$token
+            })
 			})
 			.then((response) => response.json()).
 			then((json) => console.log(json));
