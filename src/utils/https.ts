@@ -1,4 +1,4 @@
-import axios from "axios";
+//import axios from "axios";
 import CONSTS from "./constants";
 
 export function randomUrlParams() {
@@ -12,15 +12,13 @@ export function getHeader(token: any) {
     }
 }
 
-
+/*
 export async function apiGET($token: any, $url: string) {
     let rep;
     const url = CONSTS.baseUrl + `${$url}&rand=` + randomUrlParams()
     console.log('GET URL', url)
     try {
-        const res = await axios.get(url
-            ,
-            {headers: getHeader($token)}
+        const res = await axios.get(url, {headers: getHeader($token)}
         );
         rep = res.data.msg;
         console.log('GET API result', res.data);
@@ -31,7 +29,7 @@ export async function apiGET($token: any, $url: string) {
 
     return rep
 }
-
+ 
 
 export async function apiPOST($url: string, $token: string, $form: any, $action = 'new') {
     let st;
@@ -46,6 +44,54 @@ export async function apiPOST($url: string, $token: string, $form: any, $action 
         })
         console.log('POST/PUT API result', res.data);
         st = true;
+    } catch (e) {
+        console.error("React Error", e.response);
+    }
+    return {st}
+}
+*/
+
+export async function apiGET($token: any, $url: string) {
+    let rep;
+    const url = CONSTS.baseUrl + `${$url}&rand=` + randomUrlParams();
+    //console.log('GET URL', url);
+    try {
+		const res = await fetch(url).then((response) => response.json())
+		.then(
+			function (json) {
+				//alert(json.nombre_point);
+				//console.log(json);
+				rep = json;
+			}
+		);
+		 
+		/*
+        const res = await axios.get(url, {headers: getHeader($token)}
+        );
+        rep = res.data.msg;
+        console.log('GET API result', res.data);
+		*/
+    } catch (e) {
+        console.error("React Error", e.response);
+    }
+
+    return rep
+}
+ 
+
+export async function apiPOST($url: string, $token: string, $form: any, $action = 'new') {
+    let st;
+    const url = CONSTS.baseUrl + $url;
+    console.log('GET URL', url)
+	//"https://jsonplaceholder.typicode.com/posts"
+    try {
+        fetch(url, {
+			method: 'POST',
+			body: JSON.stringify({$form})
+			})
+			.then((response) => response.json()).
+			then((json) => console.log(json));
+
     } catch (e) {
         console.error("React Error", e.response);
     }
