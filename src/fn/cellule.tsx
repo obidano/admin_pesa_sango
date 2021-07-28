@@ -1,5 +1,6 @@
 import {apiGET, apiPOST} from "../utils/https";
 import {CelluleModels} from "../models/cellule_model";
+import {SangoModels} from "../models/sango_model";
 
 
 export class Cellule {
@@ -33,6 +34,22 @@ export class Cellule {
         const res = await apiPOST("sango/index.php", "", ndata_to_send);
 
         console.log("POST Resultat", res);
+    }
+
+	//Enregistrer une cellule	
+	static async InsertCellule($data:any) {
+		 
+        const res = await apiPOST("sango/index.php", "", $data);
+
+        console.log("POST Resultat", res);
+    }
+
+	//Recupérer les sango d'une cellule
+	static async sangoCellule($cellule:any) {
+       
+		const url = 'sango/index.php?cellule='+$cellule;
+		const res: SangoModels = await apiGET(null, url)??{};
+       console.log('DATA received', res);
     }
 }
 

@@ -1,8 +1,8 @@
 export interface PointModels {
-    id_point: number;
+    id_point?: number;
 	nom?: string;
-	long: number;
-	lat: number;
+	long?: number;
+	lat?: number;
 
 }
  
